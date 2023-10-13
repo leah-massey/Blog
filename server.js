@@ -1,8 +1,20 @@
 const http = require("http");
 const fs = require("fs");
+const _ = require("lodash");
 
 const server = http.createServer((req, res) => {
-  console.log(req.url, req.method);
+  //lodash
+  //.generate a rabdom number between 0 and 20
+  const num = _.random(0, 20);
+  console.log(num);
+
+  // only run function once
+  const greet = _.once(() => {
+    console.log("hello");
+  });
+
+  greet();
+  greet();
 
   // set header content type
   res.setHeader("Content-Type", "text/html");
