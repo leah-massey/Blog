@@ -5,15 +5,11 @@ const app = express();
 //register view engine
 app.set("view engine", "ejs"); // automatically looks into 'views folder'
 
-const port = 3001;
-
 //listen for requests
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+app.listen(3001);
 
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("index", { title: "Home" });
   // res.sendFile("./views/index.html", { root: __dirname });
 });
 app.get("/about", (req, res) => {
