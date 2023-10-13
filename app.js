@@ -1,6 +1,10 @@
 const express = require("express");
 
 const app = express();
+
+//register view engine
+app.set("view engine", "ejs"); // automatically looks into 'views folder'
+
 const port = 3001;
 
 //listen for requests
@@ -9,18 +13,14 @@ app.listen(port, () => {
 });
 
 app.get("/", (req, res) => {
-  res.sendFile("./views/index.html", { root: __dirname });
+  res.render("index");
+  // res.sendFile("./views/index.html", { root: __dirname });
 });
 app.get("/about", (req, res) => {
-  res.sendFile("./views/about.html", { root: __dirname });
-});
-
-//redirect
-app.get("/about-us", (req, res) => {
-  res.redirect("./about");
+  res.render("about");
 });
 
 // 404 page
 app.use((req, res) => {
-  res.status(404).sendFile("./views/404.html", { root: __dirname });
+  res.status(404).render("404");
 });
