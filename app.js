@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const Blog = require("./models/blog");
 
 const app = express();
 
@@ -21,17 +22,29 @@ app.use(express.static("public"));
 app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
-  const blogs = [
-    { title: "gouache painting", snippet: "blah blah blah" },
-    { title: "decorative lamp", snippet: "blah blah blah" },
-    { title: "wool trousers", snippet: "blah blah blah" },
-  ];
-  res.render("index", { title: "Home", blogs });
+  res.redirect("/blogs");
+  // const blogs = [
+  //   { title: "gouache painting", snippet: "blah blah blah" },
+  //   { title: "decorative lamp", snippet: "blah blah blah" },
+  //   { title: "wool trousers", snippet: "blah blah blah" },
+  // ];
+  // res.render("index", { title: "Home", blogs });
 
   // res.sendFile("./views/index.html", { root: __dirname });
 });
 app.get("/about", (req, res) => {
   res.render("about", { title: "About" });
+});
+
+app.get("/blogs", (req, res) => {
+  Blog.find()
+    .sort({ createdAt: -1 })
+    .then((result) => {
+      res.render("index", { title: "all Blogs", blogs: result });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 app.get("/blogs/create", (req, res) => {
