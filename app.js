@@ -9,14 +9,11 @@ const dbURI =
   "mongodb+srv://Leah:blog123@cluster0.5ftp6qe.mongodb.net/blogging?retryWrites=true&w=majority";
 mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then((result) => console.log("connected to db"))
+  .then((result) => app.listen(3001))
   .catch((err) => console.log(err));
 
 //register view engine
 app.set("view engine", "ejs"); // automatically looks into 'views folder'
-
-//listen for requests
-app.listen(3001);
 
 //middleware and static files
 app.use(express.static("public"));
