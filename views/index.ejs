@@ -1,10 +1,5 @@
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog | <%= title %></title>
-  </head>
-
+  <%- include("./partials/head.ejs") %>
   <body>
     <%- include("./partials/nav.ejs") %>
     <div class="blogs content">
@@ -18,4 +13,5 @@
       <% } %>
     </div>
   </body>
+  <%- include("./partials/footer.ejs") %>
 </html>
