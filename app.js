@@ -1,7 +1,16 @@
 const express = require("express");
 const morgan = require("morgan");
+const mongoose = require("mongoose");
 
 const app = express();
+
+// connect to mongodb
+const dbURI =
+  "mongodb+srv://Leah:blog123@cluster0.5ftp6qe.mongodb.net/blogging?retryWrites=true&w=majority";
+mongoose
+  .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then((result) => console.log("connected to db"))
+  .catch((err) => console.log(err));
 
 //register view engine
 app.set("view engine", "ejs"); // automatically looks into 'views folder'
