@@ -1,4 +1,5 @@
 const express = require("express");
+const morgan = require("morgan");
 
 const app = express();
 
@@ -7,6 +8,11 @@ app.set("view engine", "ejs"); // automatically looks into 'views folder'
 
 //listen for requests
 app.listen(3001);
+
+//middleware and static files
+app.use(express.static("public"));
+
+app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
   const blogs = [
