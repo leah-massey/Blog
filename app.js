@@ -9,7 +9,13 @@ app.set("view engine", "ejs"); // automatically looks into 'views folder'
 app.listen(3001);
 
 app.get("/", (req, res) => {
-  res.render("index", { title: "Home" });
+  const blogs = [
+    { title: "gouache painting", snippet: "blah blah blah" },
+    { title: "decorative lamp", snippet: "blah blah blah" },
+    { title: "wool trousers", snippet: "blah blah blah" },
+  ];
+  res.render("index", { title: "Home", blogs });
+
   // res.sendFile("./views/index.html", { root: __dirname });
 });
 app.get("/about", (req, res) => {
