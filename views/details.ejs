@@ -13,5 +13,25 @@
     </div>
 
     <%- include("./partials/footer.ejs") %>
+
+    <!-- anything inside script tag will run inside the browser (not in the server) -->
+    <script>
+      const trashcan = document.querySelector("a.delete");
+      trashcan.addEventListener("click", (e) => {
+        const endpoint = `/blogs/${trashcan.dataset.doc}`;
+        fetch(endpoint, {
+          method: "DELETE",
+        })
+          .then((response) => {
+            response.json();
+          })
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
+    </script>
   </body>
 </html>
