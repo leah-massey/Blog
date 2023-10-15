@@ -37,6 +37,11 @@ app.get("/about", (req, res) => {
   res.render("about", { title: "About" });
 });
 
+//.blog routes
+app.get("/blogs/create", (req, res) => {
+  res.render("create", { title: "Create a new blog" });
+});
+
 app.get("/blogs", (req, res) => {
   Blog.find()
     .sort({ createdAt: -1 })
@@ -80,10 +85,6 @@ app.delete("/blogs/:id", (req, res) => {
     .catch((err) => {
       console.log(err);
     });
-});
-
-app.get("/blogs/create", (req, res) => {
-  res.render("create", { title: "Create a new blog" });
 });
 
 // 404 page
