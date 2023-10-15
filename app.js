@@ -18,6 +18,7 @@ app.set("view engine", "ejs"); // automatically looks into 'views folder'
 
 //middleware and static files
 app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true })); // allows us to accept form data in blog post erq
 
 app.use(morgan("dev"));
 
@@ -41,6 +42,18 @@ app.get("/blogs", (req, res) => {
     .sort({ createdAt: -1 })
     .then((result) => {
       res.render("index", { title: "all Blogs", blogs: result });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+app.post("/blogs", (req, res) => {
+  const blog = new Blog(req.body);
+  blog
+    .save()
+    .then((result) => {
+      res.redirect("/blogs"); // user is redirected back to the blogs page after submitting post
     })
     .catch((err) => {
       console.log(err);
