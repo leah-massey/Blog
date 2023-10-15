@@ -3,9 +3,6 @@ const router = express.Router();
 const Blog = require("../models/blog");
 
 //.blog routes
-router.get("/blogs/create", (req, res) => {
-  res.render("create", { title: "Create a new blog" });
-});
 
 router.get("/blogs", (req, res) => {
   Blog.find()
@@ -28,6 +25,10 @@ router.post("/blogs", (req, res) => {
     .catch((err) => {
       console.log(err);
     });
+});
+
+router.get("/blogs/create", (req, res) => {
+  res.render("create", { title: "Create a new blog" });
 });
 
 router.get("/blogs/:id", (req, res) => {
